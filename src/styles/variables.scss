@@ -1,0 +1,32 @@
+/* neutral colors */
+$color-neutral-extra-dark: #222222;
+$color-neutral-dark: #474747;
+$color-neutral-semi-dark: #5C5C5C;
+$color-neutral-medium-dark: #7D7D7D;
+$color-neutral-medium-light: #999999;
+$color-neutral-semi-light: #D1D1D1;
+$color-neutral-light: #E5E5E5;
+$color-neutral-extra-light: #EBEBEB;
+
+/* test-alias colors */
+$color-alias-1: #E14165;
+$color-alias-2: #C2C2FF;
+$color-alias-3: #8686FF;
+
+/* test-status colors */
+$color-status-online: #1BDA9D;
+$color-status-paused: #FF8346;
+$color-status-stopped: #FE4848;
+$color-status-draft: $color-neutral-semi-dark;
+
+/* buttons colors */
+$color-button-result: #2EE5AC;
+$color-button-reset: #2EE5AC;
+$color-button-finalize: $color-neutral-medium-dark;
+
+
+/* border radiuses */
+$default-border-radius: 3px;
+
+/* box shadows */
+$default-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
