@@ -22,9 +22,11 @@ $color-test-status: (
 );
 
 /* buttons colors */
-$color-button-result: #2EE5AC;
-$color-button-reset: #2EE5AC;
-$color-button-finalize: $color-neutral-medium-dark;
+$color-button-role: (
+  results: #2EE5AC,
+  reset: #2EE5AC,
+  finalize: $color-neutral-medium-dark
+);
 
 /* border radiuses */
 $default-border-radius: 3px;

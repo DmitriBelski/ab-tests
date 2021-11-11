@@ -1,0 +1,18 @@
+@import '../styles/variables.scss';
+
+.button {
+  width: 95px;
+  height: 30px;
+  border: none;
+  border-radius: $large-border-radius;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@each $role, $color in $color-button-role {
+  .#{$role} {
+    background-color: $color;
+  }
+}
