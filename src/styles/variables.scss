@@ -8,10 +8,12 @@ $color-neutral-semi-light: #D1D1D1;
 $color-neutral-light: #E5E5E5;
 $color-neutral-extra-light: #EBEBEB;
 
-/* test-alias colors */
-$color-alias-1: #E14165;
-$color-alias-2: #C2C2FF;
-$color-alias-3: #8686FF;
+/* alias colors */
+$color-site-alias: (
+  siteId-1: #E14165,
+  siteId-2: #C2C2FF,
+  siteId-3: #8686FF
+);
 
 /* test-status colors */
 $color-test-status: (
@@ -30,6 +32,8 @@ $color-button-role: (
 
 /* border radiuses */
 $default-border-radius: 3px;
+$large-border-radius: 10px;
+$extra-large-border-radius: 15px;
 
 /* box shadows */
 $default-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
