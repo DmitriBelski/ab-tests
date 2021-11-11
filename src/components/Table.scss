@@ -38,4 +38,19 @@ th {
   text-align: start;
   padding: 0;
   font-weight: inherit;
+
+  &.sortable {
+    position: relative;
+  }
+
+  &.sortable::after {
+    content: '';
+    width: 7px;
+    height: 4px;
+    background: url(../assets/images/sort-arrow.svg) center center no-repeat;
+    position: absolute;
+    transform: translateX(8px);
+    top: 4px;
+    @include default-transition(transform);
+  }
 }

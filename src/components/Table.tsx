@@ -10,7 +10,7 @@ const Table: React.FC = () => {
       <thead className="table-header-font">
         <tr>
           <th>NAME</th>
-          <th>TYPE</th>
+          <th className="sortable">TYPE</th>
           <th>STATUS</th>
           <th>SITE</th>
           <th></th>
