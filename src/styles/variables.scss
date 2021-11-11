@@ -14,16 +14,17 @@ $color-alias-2: #C2C2FF;
 $color-alias-3: #8686FF;
 
 /* test-status colors */
-$color-status-online: #1BDA9D;
-$color-status-paused: #FF8346;
-$color-status-stopped: #FE4848;
-$color-status-draft: $color-neutral-semi-dark;
+$color-test-status: (
+  online: #1BDA9D,
+  paused: #FF8346,
+  stopped: #FE4848,
+  draft: $color-neutral-semi-dark
+);
 
 /* buttons colors */
 $color-button-result: #2EE5AC;
 $color-button-reset: #2EE5AC;
 $color-button-finalize: $color-neutral-medium-dark;
-
 
 /* border radiuses */
 $default-border-radius: 3px;

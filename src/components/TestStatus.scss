@@ -1,0 +1,7 @@
+@import '../styles/variables.scss';
+
+@each $status, $color in $color-test-status {
+  .#{$status} {
+    color: $color;
+  }
+}
