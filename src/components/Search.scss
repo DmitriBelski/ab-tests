@@ -1,0 +1,42 @@
+@import '../styles/variables.scss';
+
+.search {
+  position: relative;
+
+  &::before {
+    content: '';
+    width: 13px;
+    height: 14px;
+    position: absolute;
+    background: url(../assets/images/search.svg) center center ;
+    left: 14px;
+    top: 16px;
+  }
+  
+  &::after {
+    content: attr(data-search-sum);
+    color: $color-neutral-semi-light;
+    position: absolute;
+    right: 17px;
+    top: 14.5px;
+  }
+
+  &__input {
+    padding: 0;
+    padding-left: 37px;
+    background-color: white;
+    border: 1px solid $color-neutral-extra-light;
+    border-radius: 15px;
+    height: 45px;
+    width: 100%;
+    margin-bottom: 30px;
+  
+    &::placeholder {
+      color: $color-neutral-semi-light;
+    }
+
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+  }
+}
