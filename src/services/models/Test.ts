@@ -9,3 +9,5 @@ export interface Test {
   status: Status;
   siteId: Site['id'];
 }
+
+export type FullTest = Test & {siteUrl?: string}

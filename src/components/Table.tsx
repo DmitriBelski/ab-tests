@@ -3,7 +3,11 @@ import { TableRow } from 'components/TableRow'
 import { FullTest } from 'services/models/Test'
 import './Table.scss'
 
-const Table: React.FC = () => {
+interface TableProps {
+  data: FullTest[]
+}
+
+const Table: React.FC<TableProps> = (props) => {
   return (
     <table>
       <thead className="table-header-font">
@@ -16,10 +20,17 @@ const Table: React.FC = () => {
         </tr>
       </thead>
       <tbody>
-        <TableRow siteId={2} name="Dark theme test" type={Type.SERVER_SIDE} status={Status.PAUSED} site={'https://www.delivery.company.com'}/>
-        <TableRow siteId={1} name="Order basket redesing" type={Type.CLASSIC} status={Status.DRAFT} site={'https://market.company.com'}/>
-        <TableRow siteId={3} name="New Year's Sale Copy 1" type={Type.MVT} status={Status.STOPPED} site={'http://games.company.com'}/>
-        <TableRow siteId={3} name="Spring promotion" type={Type.CLASSIC} status={Status.ONLINE} site={'http://games.company.com'}/>
+        { props.data.map(test => (
+          <TableRow
+            key={test.id}
+            id={test.id}
+            siteId={test.siteId}
+            name={test.name}
+            type={test.type}
+            status={test.status}
+            siteUrl={test.siteUrl}
+          />
+        ))}
       </tbody>
     </table>
   )
