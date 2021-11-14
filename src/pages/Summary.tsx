@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Back } from 'components/Back'
 import { useParams } from 'react-router'
-import { TestsApiContext } from 'context/testsApiContext'
+import { Back } from 'components/Back'
 import { Test } from 'services/models/Test'
+import { ApiContext } from 'context/ApiContext'
 import './Summary.scss'
 
 interface SummaryProps {
@@ -11,7 +11,7 @@ interface SummaryProps {
 
 const Summary: React.FC<SummaryProps> = (props) => {
   const params = useParams()
-  const testsApi = React.useContext(TestsApiContext)
+  const testsApi = React.useContext(ApiContext)
   const [testName, setTestName] = React.useState<string>('')
 
   React.useEffect(() => {

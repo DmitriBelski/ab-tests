@@ -4,7 +4,7 @@ import { FullTest } from 'services/models/Test'
 import './Table.scss'
 
 interface TableProps {
-  data: FullTest[]
+  data: FullTest[] | null
 }
 
 const Table: React.FC<TableProps> = (props) => {
@@ -20,7 +20,7 @@ const Table: React.FC<TableProps> = (props) => {
         </tr>
       </thead>
       <tbody>
-        { props.data.map(test => (
+        { props.data?.map(test => (
           <TableRow
             key={test.id}
             id={test.id}
