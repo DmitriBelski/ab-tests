@@ -1,0 +1,16 @@
+@import '../styles/variables.scss';
+
+.back-link {
+  color: $color-neutral-extra-dark;
+  position: relative;
+
+  &::before {
+    content: '';
+    width: 9px;
+    height: 16px;
+    background: url(../assets/images/back-arrow.svg) center center no-repeat;
+    position: absolute;
+    top: 4px;
+    left: -28px;
+  }
+}
