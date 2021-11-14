@@ -5,8 +5,9 @@ tbody {
     background-color: white;
     height: 70px;
     align-content: center;
-    border-radius: 0 $default-border-radius $default-border-radius 0;
+    border-radius: $default-border-radius;
     position: relative;
+    z-index: 1;
   
     &::before {
       content: '';
@@ -14,7 +15,6 @@ tbody {
       width: 4px;
       height: inherit;
       background-color: white;
-      left: -4px;
       border-radius: $default-border-radius 0 0 $default-border-radius;
     }
   
@@ -26,6 +26,7 @@ tbody {
   
     &:hover {
       box-shadow: $default-box-shadow;
+      z-index: 2;
     }
   }
 }
