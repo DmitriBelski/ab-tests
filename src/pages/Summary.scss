@@ -1,0 +1,23 @@
+@import '../styles/variables.scss';
+
+.finalize-page {
+  margin: 41px 52px 49px 48px;
+  min-height: calc(100vh - 90px);
+  position: relative;
+
+  &__title {
+    color: $color-neutral-extra-dark;
+    margin-bottom: 8px;
+  }
+
+  &__task {
+    color: $color-neutral-extra-dark;
+    margin: 0;
+  }
+
+  &__nav-link {
+    position: absolute;
+    left: 28px;
+    bottom: 0px;
+  }
+}
