@@ -1,8 +1,29 @@
+@import '../styles/variables.scss';
+
 .dashboard {
   padding: 41px 52px 49px 48px;
   min-height: 100%;
 
   &__title {
     margin-bottom: 40px;
+  }
+
+  &__search {
+    margin-bottom: 30px;
+  }
+
+  &__search-result {
+    margin-top: 149px;
+  }
+}
+
+.search-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  &__message {
+    color: $color-neutral-extra-dark;
+    margin-bottom: 55px;
   }
 }
