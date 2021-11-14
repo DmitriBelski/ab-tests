@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { TableRow } from 'components/TableRow'
-import { Status } from 'models/Status'
-import { Type } from 'models/Type'
+import { FullTest } from 'services/models/Test'
 import './Table.scss'
 
 const Table: React.FC = () => {

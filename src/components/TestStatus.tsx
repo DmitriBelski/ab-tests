@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Status } from 'models/Status'
+import { Status } from 'services/models/Status'
 import capitalize from 'utils/capitalize'
 import classnames from 'utils/classnames'
 import './TestStatus.scss'

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Buttons } from 'models/Button'
+import { Buttons } from 'services/models/Button'
 import capitalize from 'utils/capitalize'
 import classnames from 'utils/classnames'
 import './Button.scss'

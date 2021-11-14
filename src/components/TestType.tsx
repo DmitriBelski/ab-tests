@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Type, typeFormat } from 'models/Type'
+import { Type, typeFormat } from 'services/models/Type'
 import './TestType.scss'
 
 interface TestTypeProps {
