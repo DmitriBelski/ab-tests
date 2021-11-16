@@ -1,17 +1,33 @@
 import * as React from 'react'
 import { TableRow } from 'components/TableRow'
+import { FullTest, TestHeaders, TestTableHeaders } from 'services/models/Test'
 import classnames from 'utils/classnames'
-import { FullTest } from 'services/models/Test'
+import { OrderBy } from 'utils/sort'
 import './Table.scss'
 
+export type SortType = {
+  tag: TestHeaders,
+  order: OrderBy
+}
+
 interface TableProps {
-  data: FullTest[] | null
+  data: FullTest[] | null,
+  onSort: (type: SortType) => void
 }
 
 const Table: React.FC<TableProps> = (props) => {
   const [asc, setAsc] = React.useState<boolean>(true)
-  const TableHeadRef = React.useRef<HTMLTableRowElement>(null)
   const [sortedColumn, setSortedColumn] = React.useState<number>()
+
+  const sortHandler = (index: number, value: TestHeaders) => {
+    const order = index === sortedColumn ? !asc : true
+    setAsc(order)
+    setSortedColumn(index)
+    props.onSort({
+      tag: value,
+      order: order ? OrderBy.ASC : OrderBy.DESC
+    })
+  }
 
   const columnHeaderClass = (index: number) => classnames({
     header: true,
@@ -22,9 +38,15 @@ const Table: React.FC<TableProps> = (props) => {
   return (
     <table>
       <thead className="table-header-font">
-        <tr ref={TableHeadRef}>
-          {Object.keys(TestTableHeaders).map((tag, i) => (
-            <th key={i} className={columnHeaderClass(i)} onClick={(e) => sortHandler(e)}>{tag.toUpperCase()}</th>
+        <tr>
+          {/* it's not a very good solutions, but really don't know how to avoid this type assertion */}
+          {(Object.keys(TestTableHeaders) as TestHeaders[]).map((tag, i) => (
+            <th
+              key={tag}
+              className={columnHeaderClass(i)}
+              onClick={() => sortHandler(i, tag)}>
+              {tag.toUpperCase()}
+            </th>
           ))}
         </tr>
       </thead>

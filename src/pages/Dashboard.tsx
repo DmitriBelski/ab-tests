@@ -1,15 +1,22 @@
 import * as React from 'react'
 import { Search } from 'components/Search'
-import { Table } from 'components/Table'
+import { SortType, Table } from 'components/Table'
 import { Button } from 'components/Button'
 import { FullTest } from 'services/models/Test'
 import { Buttons } from 'services/models/Button'
 import { TestsContext } from 'context/TestsContext'
+import { sort } from 'utils/sort'
 import './Dashboard.scss'
 
 const Dashboard: React.FC = () => {
-  const [testsToShow, setTestsToShow] = React.useState<FullTest[]>([])
+  const [testsToRender, setTestsToRender] = React.useState<FullTest[]>([])
   const tests = React.useContext(TestsContext)
+
+  const sortTests = (type: SortType) => {
+    if (tests) {
+      setTestsToRender(sort(tests, type.tag, type.order))
+    }
+  }
 
   return (
     <div className="dashboard">
@@ -17,8 +24,8 @@ const Dashboard: React.FC = () => {
       <div className="dashboard__search">
         <Search />
       </div>
-      {testsToShow.length > 0
-        ? <Table data={tests}/>
+      {testsToRender.length >= 0
+        ? <Table data={testsToRender.length ? testsToRender : tests} onSort={sortTests}/>
         : <div className="dashboard__search-result search-result">
             <p className="search-result__message message-font">
               Your search did not match any results.
