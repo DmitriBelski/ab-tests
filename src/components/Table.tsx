@@ -28,7 +28,7 @@ const Table: React.FC<TableProps> = (props) => {
             name={test.name}
             type={test.type}
             status={test.status}
-            siteUrl={test.siteUrl}
+            site={test.site}
           />
         ))}
       </tbody>

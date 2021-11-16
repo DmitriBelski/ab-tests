@@ -4,7 +4,6 @@ import { TestType } from './TestType'
 import { TestStatus } from './TestStatus'
 import { Button } from './Button'
 import { Loader } from './Loader'
-import refineUrl from 'utils/refineUrl'
 import { Buttons } from 'services/models/Button'
 import { FullTest } from 'services/models/Test'
 import './TableRow.scss'
@@ -24,7 +23,7 @@ const TableRow: React.FC<FullTest> = React.memo((props) => {
         <TestStatus value={props.status} />
       </td>
       <td className="table-regular-font">
-        {props.siteUrl ? refineUrl(props.siteUrl) : <Loader />}
+        {props.site || <Loader />}
       </td>
       <td>
         <NavLink to={`/${buttonValue.toLowerCase()}/${props.id}`}>

@@ -1,6 +1,6 @@
-import { Site } from "./Site";
-import { Status } from "./Status";
-import { Type } from "./Type";
+import { Site } from './Site'
+import { Status } from './Status'
+import { Type } from './Type'
 
 export interface Test {
   id: number;
@@ -10,4 +10,4 @@ export interface Test {
   siteId: Site['id'];
 }
 
-export type FullTest = Test & {siteUrl?: string}
+export type FullTest = Test & {site?: string}

@@ -4,6 +4,7 @@ import { FullTest } from 'services/models/Test'
 import { TestsApi } from 'services/TestsApi'
 import { ApiContext } from './ApiContext'
 import { TestsContext } from './TestsContext'
+import refineUrl from 'utils/refineUrl'
 
 interface ContextWrapperProps {
   children: React.ReactChild | React.ReactChildren
@@ -23,7 +24,7 @@ const ContextWrapper: React.FC<ContextWrapperProps> = ({ children }) => {
   }, [testsApi])
 
   React.useEffect(() => {
-    if (tests.length && fetchUrlFlag) {
+    if (tests?.length && fetchUrlFlag) {
       if (!testsApi) throw new Error('Tests api is not available')
       const fetchSiteUrl = async (id: Site['id']): Promise<string> => {
         const siteResponse = await testsApi.fetchSite(id)
@@ -39,9 +40,10 @@ const ContextWrapper: React.FC<ContextWrapperProps> = ({ children }) => {
         fetchSiteUrl(id)
           .then((url) => {
             setTests(prev => {
-              const result = prev.map(test => {
-                if (!test.siteUrl && test.siteId === id) {
-                  return { ...test, siteUrl: url }
+              const result: FullTest[] = prev.map(test => {
+                if (!test.site && test.siteId === id) {
+                  const site = url ? refineUrl(url) : ''
+                  return { ...test, site }
                 }
                 return test
               })

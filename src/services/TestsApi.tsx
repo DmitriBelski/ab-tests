@@ -6,16 +6,22 @@ export class TestsApi {
 
   async fetchTests (): Promise<Test[]> {
     const url = new URL(`${this.API_ROOT}tests`)
-    return fetch(url.toString()).then((res) => res.json())
+    return fetch(url.toString())
+      .then((res) => res.json())
+      .catch((error) => console.log('Fetch Error:', error))
   }
 
   async fetchTest (testId: Test['id']): Promise<Test> {
     const url = new URL(`${this.API_ROOT}tests/${testId}`)
-    return fetch(url.toString()).then((res) => res.json())
+    return fetch(url.toString())
+      .then((res) => res.json())
+      .catch((error) => console.log('Fetch Error:', error))
   }
 
   async fetchSite (siteId: Site['id']): Promise<Site> {
     const url = new URL(`${this.API_ROOT}sites/${siteId}`)
-    return fetch(url.toString()).then((res) => res.json())
+    return fetch(url.toString())
+      .then((res) => res.json())
+      .catch((error) => console.log('Fetch Error:', error))
   }
 }
