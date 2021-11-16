@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { TableRow } from 'components/TableRow'
+import classnames from 'utils/classnames'
 import { FullTest } from 'services/models/Test'
 import './Table.scss'
 
@@ -8,15 +9,23 @@ interface TableProps {
 }
 
 const Table: React.FC<TableProps> = (props) => {
+  const [asc, setAsc] = React.useState<boolean>(true)
+  const TableHeadRef = React.useRef<HTMLTableRowElement>(null)
+  const [sortedColumn, setSortedColumn] = React.useState<number>()
+
+  const columnHeaderClass = (index: number) => classnames({
+    header: true,
+    sortable: index === sortedColumn,
+    'sortable-desc': !asc && index === sortedColumn
+  })
+
   return (
     <table>
       <thead className="table-header-font">
-        <tr>
-          <th>NAME</th>
-          <th className="sortable">TYPE</th>
-          <th>STATUS</th>
-          <th>SITE</th>
-          <th></th>
+        <tr ref={TableHeadRef}>
+          {Object.keys(TestTableHeaders).map((tag, i) => (
+            <th key={i} className={columnHeaderClass(i)} onClick={(e) => sortHandler(e)}>{tag.toUpperCase()}</th>
+          ))}
         </tr>
       </thead>
       <tbody>

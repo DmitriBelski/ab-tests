@@ -11,3 +11,12 @@ export interface Test {
 }
 
 export type FullTest = Test & {site?: string}
+
+export enum TestTableHeaders {
+  name = 'name',
+  type = 'type',
+  status = 'status',
+  site = 'site'
+}
+
+export type TestHeaders = keyof Pick<FullTest, `${TestTableHeaders}`>

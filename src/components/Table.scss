@@ -1,5 +1,9 @@
 @import '../styles/variables.scss';
 
+.header{
+  cursor: pointer;
+}
+
 table {
   display: -ms-grid;
   display: grid;
@@ -52,5 +56,9 @@ th {
     transform: translateX(8px);
     top: 4px;
     @include default-transition(transform);
+  }
+
+  &.sortable-desc::after {
+    transform: translateX(8px) rotateZ(-180deg);
   }
 }
