@@ -8,10 +8,10 @@ export const matchRating = (search: string, array: string[]): number[] => {
   })
 }
 
-export const filterNegativeRating = (rating: number[]) => {
+export const filterPositiveRating = (rating: number[]) => {
   return rating.filter(rate => rate >= 0)
 }
 
-export const filterByNegativeRating = (array: FullTest[], rating: number[]) => {
+export const filterByPositiveRating = (array: FullTest[], rating: number[]) => {
   return array.filter((_, i) => rating[i] >= 0)
 }

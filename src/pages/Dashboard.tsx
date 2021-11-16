@@ -6,26 +6,36 @@ import { FullTest } from 'services/models/Test'
 import { Buttons } from 'services/models/Button'
 import { TestsContext } from 'context/TestsContext'
 import { OrderBy, sort } from 'utils/sort'
-import { filterByNegativeRating, filterNegativeRating, matchRating } from 'utils/match'
+import { filterByPositiveRating, filterPositiveRating, matchRating } from 'utils/match'
 import './Dashboard.scss'
 
 const Dashboard: React.FC = () => {
-  const [testsToRender, setTestsToRender] = React.useState<FullTest[]>([])
   const tests = React.useContext(TestsContext)
+  const [searchFiltered, setSearchFiltered] = React.useState<FullTest[]>([])
+  const [toRender, setToRender] = React.useState<FullTest[]>([])
+
+  React.useEffect(() => {
+    if (tests) {
+      setToRender(tests)
+    }
+  }, [tests])
 
   const sortHandler = (type: SortType) => {
     if (tests) {
-      setTestsToRender(sort(tests, type.tag, type.tag, type.order))
+      const source = searchFiltered.length > 0 ? searchFiltered : tests
+      setToRender(sort(source, type.tag, type.tag, type.order))
     }
   }
 
   const searchHandler = (search: string) => {
-    const testNames = tests?.map(item => item.name)
-    if (testNames && tests) {
+    if (tests) {
+      const testNames = tests.map(item => item.name)
       const rating = matchRating(search, testNames)
-      const matchedTests = filterByNegativeRating(tests, rating)
-      const positiveRating = filterNegativeRating(rating)
-      setTestsToRender(sort(matchedTests, 'name', 'searched', OrderBy.ASC, positiveRating))
+      const matchedTests = filterByPositiveRating(tests, rating)
+      const positiveRating = filterPositiveRating(rating)
+      const result = sort(matchedTests, 'name', 'searched', OrderBy.ASC, positiveRating)
+      setSearchFiltered(result)
+      setToRender(result)
     }
   }
 
@@ -35,8 +45,8 @@ const Dashboard: React.FC = () => {
       <div className="dashboard__search">
         <Search onSearch={searchHandler}/>
       </div>
-      {testsToRender.length >= 0
-        ? <Table data={testsToRender.length ? testsToRender : tests} onSort={sortHandler}/>
+      {toRender.length > 0
+        ? <Table data={toRender} onSort={sortHandler}/>
         : <div className="dashboard__search-result search-result">
             <p className="search-result__message message-font">
               Your search did not match any results.
