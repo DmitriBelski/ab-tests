@@ -6,6 +6,7 @@ import './Button.scss'
 
 interface ButtonProps {
   value: Buttons;
+  onClick?: () => void
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
@@ -19,7 +20,7 @@ const Button: React.FC<ButtonProps> = (props) => {
   })
 
   return (
-    <button className={buttonClass} type='button'>
+    <button className={buttonClass} type='button' onClick={props.onClick}>
       {capitalize(props.value.toLowerCase())}
     </button>
   )
