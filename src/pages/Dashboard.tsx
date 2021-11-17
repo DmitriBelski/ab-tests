@@ -32,7 +32,7 @@ const Dashboard: React.FC = () => {
     if (tests) {
       const source = searchFiltered && searchFiltered.length > 0 ? searchFiltered : tests
       if (type.tag === 'status') {
-        const rating = source.map(item => StatusOrder.findIndex(order => order === item.status))
+        const rating = source.map(item => StatusOrder.indexOf(item.status))
         setToRender(sort(source, type.tag, type.tag, type.order, rating))
       } else {
         setToRender(sort(source, type.tag, type.tag, type.order))

@@ -58,19 +58,11 @@ const prepareElement = <T>(element: T, key: keyof T, rule: string, rating?: numb
   }
 }
 
-const index = <T>(array: T[], value: T) => {
-  return array.findIndex(item => item === value)
-}
-
-const valueByOtherIndex = <T>(target: number[] | undefined, other: T[], value: T) => {
-  return target?.find((_, i) => i === index(other, value))
-}
-
 export const sort = <T>(array: T[], key: keyof T, rule: string, order: OrderBy, rating?: number[]): T[] => {
   const result = [...array] as Array<T>
   return result.sort((a, b) => {
-    const first = prepareElement(a, key, rule, valueByOtherIndex(rating, array, a))
-    const second = prepareElement(b, key, rule, valueByOtherIndex(rating, array, b))
+    const first = prepareElement(a, key, rule, rating?.[array.indexOf(a)])
+    const second = prepareElement(b, key, rule, rating?.[array.indexOf(b)])
     const prepared = prepareCompare(uniCompare, order)
     return prepared(first, second)
   })
