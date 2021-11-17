@@ -9,18 +9,24 @@ import { OrderBy, sort } from 'utils/sort'
 import { filterByPositiveRating, filterPositiveRating, matchRating } from 'utils/match'
 import { StatusOrder } from 'services/models/Status'
 import './Dashboard.scss'
+import plural from 'utils/plural'
 
 const Dashboard: React.FC = () => {
   const tests = React.useContext(TestsContext)
   const [searchFiltered, setSearchFiltered] = React.useState<FullTest[] | null>(null)
   const [toRender, setToRender] = React.useState<FullTest[]>([])
   const [searchValue, setSearchValue] = React.useState<string>('')
+  const [searchSummary, setSearchSummary] = React.useState<number>(0)
 
   React.useEffect(() => {
     if (tests) {
       setToRender(tests)
     }
   }, [tests])
+
+  React.useEffect(() => {
+    setSearchSummary(toRender?.length)
+  }, [toRender])
 
   const sortHandler = (type: SortType) => {
     if (tests) {
@@ -51,7 +57,7 @@ const Dashboard: React.FC = () => {
     <div className="dashboard">
       <h1 className="dashboard__title h1-font">Dashboard</h1>
       <div className="dashboard__search">
-        <Search value={searchValue} onSearch={searchHandler}/>
+        <Search value={searchValue} summary={plural(searchSummary, 'test')} onSearch={searchHandler}/>
       </div>
       {toRender.length > 0
         ? <Table data={toRender} onSort={sortHandler}/>

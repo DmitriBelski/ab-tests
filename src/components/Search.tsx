@@ -3,6 +3,7 @@ import './Search.scss'
 
 interface SearchProps {
   value: string
+  summary: string
   onSearch: (value: string) => void
 }
 
@@ -12,7 +13,7 @@ const Search: React.FC<SearchProps> = (props) => {
   }
 
   return (
-    <div className="search input-font" data-search-sum="4 tests">
+    <div className="search input-font" data-search-sum={props.summary}>
       <input
         className="search__input input-font"
         type="search"
