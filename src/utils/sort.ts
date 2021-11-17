@@ -51,9 +51,8 @@ const prepareElement = <T>(element: T, key: keyof T, rule: string, rating?: numb
     case 'name':
     case 'type':
     case 'site':
-      return element[key] || ''
+      return element[key]
     case 'status':
-      return rating
     case 'searched':
       return rating
     default:
