@@ -1,6 +1,3 @@
-import { StatusOrder } from 'services/models/Status'
-import { FullTest, TestHeaders } from 'services/models/Test'
-
 export enum OrderBy {
   ASC = 'ASC',
   DESC = 'DESC'
@@ -32,11 +29,11 @@ const uniCompare = (a: unknown, b: unknown): number => {
   }
 }
 
-const isNumberTuple = (arr: unknown[]): arr is number[] => {
+const isNumberTuple = (arr: unknown[]): arr is [number, number] => {
   return arr.length === 2 && typeof arr[0] === 'number' && typeof arr[1] === 'number'
 }
 
-const isStringTuple = (arr: unknown[]): arr is string[] => {
+const isStringTuple = (arr: unknown[]): arr is [string, string] => {
   return arr.length === 2 && typeof arr[0] === 'string' && typeof arr[1] === 'string'
 }
 
@@ -49,31 +46,31 @@ const prepareCompare = <T extends Function>(func: T, order: OrderBy): T | FlipAr
   }
 }
 
-const prepareElement = (element: FullTest, key: TestHeaders, rule: string, rating?: number): number | string => {
+const prepareElement = <T>(element: T, key: keyof T, rule: string, rating?: number) => {
   switch (rule) {
     case 'name':
     case 'type':
     case 'site':
       return element[key] || ''
     case 'status':
-      return StatusOrder.findIndex(order => order === element[key])
+      return rating
     case 'searched':
-      return rating || 0
+      return rating
     default:
       return 0
   }
 }
 
-const index = (array: FullTest[], value: FullTest) => {
+const index = <T>(array: T[], value: T) => {
   return array.findIndex(item => item === value)
 }
 
-const valueByOtherIndex = (target: number[] | undefined, other: FullTest[], value: FullTest) => {
+const valueByOtherIndex = <T>(target: number[] | undefined, other: T[], value: T) => {
   return target?.find((_, i) => i === index(other, value))
 }
 
-export const sort = (array: FullTest[], key: TestHeaders, rule: string, order: OrderBy, rating?: number[]): FullTest[] => {
-  const result = [...array] as Array<FullTest>
+export const sort = <T>(array: T[], key: keyof T, rule: string, order: OrderBy, rating?: number[]): T[] => {
+  const result = [...array] as Array<T>
   return result.sort((a, b) => {
     const first = prepareElement(a, key, rule, valueByOtherIndex(rating, array, a))
     const second = prepareElement(b, key, rule, valueByOtherIndex(rating, array, b))

@@ -7,6 +7,7 @@ import { Buttons } from 'services/models/Button'
 import { TestsContext } from 'context/TestsContext'
 import { OrderBy, sort } from 'utils/sort'
 import { filterByPositiveRating, filterPositiveRating, matchRating } from 'utils/match'
+import { StatusOrder } from 'services/models/Status'
 import './Dashboard.scss'
 
 const Dashboard: React.FC = () => {
@@ -24,7 +25,12 @@ const Dashboard: React.FC = () => {
   const sortHandler = (type: SortType) => {
     if (tests) {
       const source = searchFiltered && searchFiltered.length > 0 ? searchFiltered : tests
-      setToRender(sort(source, type.tag, type.tag, type.order))
+      if (type.tag === 'status') {
+        const rating = source.map(item => StatusOrder.findIndex(order => order === item.status))
+        setToRender(sort(source, type.tag, type.tag, type.order, rating))
+      } else {
+        setToRender(sort(source, type.tag, type.tag, type.order))
+      }
     }
   }
 
@@ -49,7 +55,7 @@ const Dashboard: React.FC = () => {
       </div>
       {toRender.length > 0
         ? <Table data={toRender} onSort={sortHandler}/>
-        : searchFiltered && 
+        : searchFiltered &&
           <div className="dashboard__search-result search-result">
             <p className="search-result__message message-font">
               Your search did not match any results.
