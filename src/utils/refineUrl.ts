@@ -1,6 +1,6 @@
 function refineUrl (string: string): string {
-  const re = /^http(s)?:\/\/(www\.)?/
-  return string.replace(re, '')
+  const url = new URL(string)
+  return url.hostname.replace('www.', '')
 }
 
 export default refineUrl
